@@ -1,0 +1,699 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		210240E02D5CE67E00D190AA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 210240DF2D5CE67E00D190AA /* FirebaseAnalytics */; };
+		210240E22D5CE67E00D190AA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 210240E12D5CE67E00D190AA /* FirebaseAuth */; };
+		210240E42D5CE67E00D190AA /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 210240E32D5CE67E00D190AA /* FirebaseCore */; };
+		210240E62D5CE67E00D190AA /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 210240E52D5CE67E00D190AA /* FirebaseFirestore */; };
+		210240E82D5CE67E00D190AA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 210240E72D5CE67E00D190AA /* FirebaseStorage */; };
+		210240EE2D5E0F2500D190AA /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 210240ED2D5E0F2500D190AA /* KakaoSDKAuth */; };
+		210240F02D5E0F2500D190AA /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 210240EF2D5E0F2500D190AA /* KakaoSDKCommon */; };
+		210240F22D5E0F2500D190AA /* KakaoSDKTalk in Frameworks */ = {isa = PBXBuildFile; productRef = 210240F12D5E0F2500D190AA /* KakaoSDKTalk */; };
+		210240F42D5E0F2500D190AA /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 210240F32D5E0F2500D190AA /* KakaoSDKUser */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		210240C02D5CE52100D190AA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 210240A72D5CE52100D190AA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 210240AE2D5CE52100D190AA;
+			remoteInfo = RORORO;
+		};
+		210240CA2D5CE52100D190AA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 210240A72D5CE52100D190AA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 210240AE2D5CE52100D190AA;
+			remoteInfo = RORORO;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		210240AF2D5CE52100D190AA /* RORORO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RORORO.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		210240BF2D5CE52100D190AA /* ROROROTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ROROROTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		210240C92D5CE52100D190AA /* ROROROUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ROROROUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		210240FC2D5E1B0600D190AA /* Exceptions for "RORORO" folder in "RORORO" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+				Partner.swift,
+				ROROROUITests.swift,
+			);
+			target = 210240AE2D5CE52100D190AA /* RORORO */;
+		};
+		210241372D61E5BE00D190AA /* Exceptions for "RORORO" folder in "ROROROTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Partner.swift,
+			);
+			target = 210240BE2D5CE52100D190AA /* ROROROTests */;
+		};
+		210241672D62C8F900D190AA /* Exceptions for "RORORO" folder in "ROROROUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				ROROROUITests.swift,
+			);
+			target = 210240C82D5CE52100D190AA /* ROROROUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		210240B12D5CE52100D190AA /* RORORO */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				210240FC2D5E1B0600D190AA /* Exceptions for "RORORO" folder in "RORORO" target */,
+				210241372D61E5BE00D190AA /* Exceptions for "RORORO" folder in "ROROROTests" target */,
+				210241672D62C8F900D190AA /* Exceptions for "RORORO" folder in "ROROROUITests" target */,
+			);
+			path = RORORO;
+			sourceTree = "<group>";
+		};
+		210240C22D5CE52100D190AA /* ROROROTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ROROROTests;
+			sourceTree = "<group>";
+		};
+		210240CC2D5CE52100D190AA /* ROROROUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ROROROUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		210240AC2D5CE52100D190AA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				210240E02D5CE67E00D190AA /* FirebaseAnalytics in Frameworks */,
+				210240F22D5E0F2500D190AA /* KakaoSDKTalk in Frameworks */,
+				210240F02D5E0F2500D190AA /* KakaoSDKCommon in Frameworks */,
+				210240E62D5CE67E00D190AA /* FirebaseFirestore in Frameworks */,
+				210240E42D5CE67E00D190AA /* FirebaseCore in Frameworks */,
+				210240E82D5CE67E00D190AA /* FirebaseStorage in Frameworks */,
+				210240E22D5CE67E00D190AA /* FirebaseAuth in Frameworks */,
+				210240EE2D5E0F2500D190AA /* KakaoSDKAuth in Frameworks */,
+				210240F42D5E0F2500D190AA /* KakaoSDKUser in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210240BC2D5CE52100D190AA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210240C62D5CE52100D190AA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		210240A62D5CE52100D190AA = {
+			isa = PBXGroup;
+			children = (
+				210240B12D5CE52100D190AA /* RORORO */,
+				210240C22D5CE52100D190AA /* ROROROTests */,
+				210240CC2D5CE52100D190AA /* ROROROUITests */,
+				210240B02D5CE52100D190AA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		210240B02D5CE52100D190AA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				210240AF2D5CE52100D190AA /* RORORO.app */,
+				210240BF2D5CE52100D190AA /* ROROROTests.xctest */,
+				210240C92D5CE52100D190AA /* ROROROUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		210240AE2D5CE52100D190AA /* RORORO */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 210240D32D5CE52100D190AA /* Build configuration list for PBXNativeTarget "RORORO" */;
+			buildPhases = (
+				210240AB2D5CE52100D190AA /* Sources */,
+				210240AC2D5CE52100D190AA /* Frameworks */,
+				210240AD2D5CE52100D190AA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				210240B12D5CE52100D190AA /* RORORO */,
+			);
+			name = RORORO;
+			packageProductDependencies = (
+				210240DF2D5CE67E00D190AA /* FirebaseAnalytics */,
+				210240E12D5CE67E00D190AA /* FirebaseAuth */,
+				210240E32D5CE67E00D190AA /* FirebaseCore */,
+				210240E52D5CE67E00D190AA /* FirebaseFirestore */,
+				210240E72D5CE67E00D190AA /* FirebaseStorage */,
+				210240ED2D5E0F2500D190AA /* KakaoSDKAuth */,
+				210240EF2D5E0F2500D190AA /* KakaoSDKCommon */,
+				210240F12D5E0F2500D190AA /* KakaoSDKTalk */,
+				210240F32D5E0F2500D190AA /* KakaoSDKUser */,
+			);
+			productName = RORORO;
+			productReference = 210240AF2D5CE52100D190AA /* RORORO.app */;
+			productType = "com.apple.product-type.application";
+		};
+		210240BE2D5CE52100D190AA /* ROROROTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 210240D62D5CE52100D190AA /* Build configuration list for PBXNativeTarget "ROROROTests" */;
+			buildPhases = (
+				210240BB2D5CE52100D190AA /* Sources */,
+				210240BC2D5CE52100D190AA /* Frameworks */,
+				210240BD2D5CE52100D190AA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				210240C12D5CE52100D190AA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				210240C22D5CE52100D190AA /* ROROROTests */,
+			);
+			name = ROROROTests;
+			packageProductDependencies = (
+			);
+			productName = ROROROTests;
+			productReference = 210240BF2D5CE52100D190AA /* ROROROTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		210240C82D5CE52100D190AA /* ROROROUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 210240D92D5CE52100D190AA /* Build configuration list for PBXNativeTarget "ROROROUITests" */;
+			buildPhases = (
+				210240C52D5CE52100D190AA /* Sources */,
+				210240C62D5CE52100D190AA /* Frameworks */,
+				210240C72D5CE52100D190AA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				210240CB2D5CE52100D190AA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				210240CC2D5CE52100D190AA /* ROROROUITests */,
+			);
+			name = ROROROUITests;
+			packageProductDependencies = (
+			);
+			productName = ROROROUITests;
+			productReference = 210240C92D5CE52100D190AA /* ROROROUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		210240A72D5CE52100D190AA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					210240AE2D5CE52100D190AA = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					210240BE2D5CE52100D190AA = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 210240AE2D5CE52100D190AA;
+					};
+					210240C82D5CE52100D190AA = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 210240AE2D5CE52100D190AA;
+					};
+				};
+			};
+			buildConfigurationList = 210240AA2D5CE52100D190AA /* Build configuration list for PBXProject "RORORO" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 210240A62D5CE52100D190AA;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				210240DE2D5CE67E00D190AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				210240EC2D5E0F2500D190AA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 210240B02D5CE52100D190AA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				210240AE2D5CE52100D190AA /* RORORO */,
+				210240BE2D5CE52100D190AA /* ROROROTests */,
+				210240C82D5CE52100D190AA /* ROROROUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		210240AD2D5CE52100D190AA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210240BD2D5CE52100D190AA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210240C72D5CE52100D190AA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		210240AB2D5CE52100D190AA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210240BB2D5CE52100D190AA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210240C52D5CE52100D190AA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		210240C12D5CE52100D190AA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 210240AE2D5CE52100D190AA /* RORORO */;
+			targetProxy = 210240C02D5CE52100D190AA /* PBXContainerItemProxy */;
+		};
+		210240CB2D5CE52100D190AA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 210240AE2D5CE52100D190AA /* RORORO */;
+			targetProxy = 210240CA2D5CE52100D190AA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		210240D12D5CE52100D190AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		210240D22D5CE52100D190AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		210240D42D5CE52100D190AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"RORORO/Preview Content\"";
+				DEVELOPMENT_TEAM = L4XY5FPFQW;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RORORO/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MUN.RORORO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		210240D52D5CE52100D190AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"RORORO/Preview Content\"";
+				DEVELOPMENT_TEAM = L4XY5FPFQW;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RORORO/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MUN.RORORO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		210240D72D5CE52100D190AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L4XY5FPFQW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MUN.ROROROTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RORORO.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RORORO";
+			};
+			name = Debug;
+		};
+		210240D82D5CE52100D190AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L4XY5FPFQW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MUN.ROROROTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RORORO.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RORORO";
+			};
+			name = Release;
+		};
+		210240DA2D5CE52100D190AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L4XY5FPFQW;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MUN.ROROROUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RORORO;
+			};
+			name = Debug;
+		};
+		210240DB2D5CE52100D190AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L4XY5FPFQW;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MUN.ROROROUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RORORO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		210240AA2D5CE52100D190AA /* Build configuration list for PBXProject "RORORO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				210240D12D5CE52100D190AA /* Debug */,
+				210240D22D5CE52100D190AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		210240D32D5CE52100D190AA /* Build configuration list for PBXNativeTarget "RORORO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				210240D42D5CE52100D190AA /* Debug */,
+				210240D52D5CE52100D190AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		210240D62D5CE52100D190AA /* Build configuration list for PBXNativeTarget "ROROROTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				210240D72D5CE52100D190AA /* Debug */,
+				210240D82D5CE52100D190AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		210240D92D5CE52100D190AA /* Build configuration list for PBXNativeTarget "ROROROUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				210240DA2D5CE52100D190AA /* Debug */,
+				210240DB2D5CE52100D190AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		210240DE2D5CE67E00D190AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.8.1;
+			};
+		};
+		210240EC2D5E0F2500D190AA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.23.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		210240DF2D5CE67E00D190AA /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 210240DE2D5CE67E00D190AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		210240E12D5CE67E00D190AA /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 210240DE2D5CE67E00D190AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		210240E32D5CE67E00D190AA /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 210240DE2D5CE67E00D190AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		210240E52D5CE67E00D190AA /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 210240DE2D5CE67E00D190AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		210240E72D5CE67E00D190AA /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 210240DE2D5CE67E00D190AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		210240ED2D5E0F2500D190AA /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 210240EC2D5E0F2500D190AA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKAuth;
+		};
+		210240EF2D5E0F2500D190AA /* KakaoSDKCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 210240EC2D5E0F2500D190AA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCommon;
+		};
+		210240F12D5E0F2500D190AA /* KakaoSDKTalk */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 210240EC2D5E0F2500D190AA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKTalk;
+		};
+		210240F32D5E0F2500D190AA /* KakaoSDKUser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 210240EC2D5E0F2500D190AA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKUser;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 210240A72D5CE52100D190AA /* Project object */;
+}
