@@ -91,7 +91,7 @@ struct PartnerRegisterView: View {
                 Button(action: {
                     viewModel.addPartner() // 거래처 추가 함수 호출
                 }) {
-                    Text("거래처 등록")
+                    Text("거래처 등록sdf")
                         .font(.title2)
                         .padding()
                         .frame(maxWidth: .infinity)
