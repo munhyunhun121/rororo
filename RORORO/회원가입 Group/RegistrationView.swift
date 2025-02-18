@@ -112,6 +112,8 @@ struct RegistrationView: View {
         }
     }
 
+    
+    
     // ✅ 닉네임 중복 확인 함수
     func checkNicknameAvailability() {
         guard !nickname.isEmpty else {

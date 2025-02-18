@@ -45,18 +45,11 @@
 		210240FC2D5E1B0600D190AA /* Exceptions for "RORORO" folder in "RORORO" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"거래처등록 Group/Partner.swift",
 				Info.plist,
-				Partner.swift,
 				ROROROUITests.swift,
 			);
 			target = 210240AE2D5CE52100D190AA /* RORORO */;
-		};
-		210241372D61E5BE00D190AA /* Exceptions for "RORORO" folder in "ROROROTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Partner.swift,
-			);
-			target = 210240BE2D5CE52100D190AA /* ROROROTests */;
 		};
 		210241672D62C8F900D190AA /* Exceptions for "RORORO" folder in "ROROROUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -65,6 +58,13 @@
 			);
 			target = 210240C82D5CE52100D190AA /* ROROROUITests */;
 		};
+		21CB59A22D63735000568AA7 /* Exceptions for "RORORO" folder in "ROROROTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"거래처등록 Group/Partner.swift",
+			);
+			target = 210240BE2D5CE52100D190AA /* ROROROTests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -72,7 +72,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				210240FC2D5E1B0600D190AA /* Exceptions for "RORORO" folder in "RORORO" target */,
-				210241372D61E5BE00D190AA /* Exceptions for "RORORO" folder in "ROROROTests" target */,
+				21CB59A22D63735000568AA7 /* Exceptions for "RORORO" folder in "ROROROTests" target */,
 				210241672D62C8F900D190AA /* Exceptions for "RORORO" folder in "ROROROUITests" target */,
 			);
 			path = RORORO;

@@ -114,29 +114,7 @@ struct TabButton: View {
 }
 
 // ✅ 스크롤 가능한 샘플 뷰 (각 탭에 표시될 화면)
-struct HomeView: View {
-    @StateObject private var homeViewModel = HomeViewModel()
-  
-    var body: some View {
-        VStack{
-            DashboardSummaryView(homeViewModel: HomeViewModel())
-        }
-           ScrollView {
-               VStack(spacing: 10) {
-                   if let errorMessage = homeViewModel.errorMessage {
-                       Text(errorMessage)
-                           .foregroundColor(.red)
-                           .padding()
-                   } else {
-                       ForEach(homeViewModel.partners) { partner in
-                           PartnerCardView(partner: partner)
-                       }
-                   }
-               }
-               .padding()
-           }
-       }
-   }
+
 
 
 struct ProfileView: View {
