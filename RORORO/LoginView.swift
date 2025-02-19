@@ -12,6 +12,8 @@ struct LoginView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
+                Text("ZATAM")
+                    .font(.title)
                 TextField("Email", text: $email)
                     .autocapitalization(.none)
                     .keyboardType(.emailAddress)
@@ -43,13 +45,12 @@ struct LoginView: View {
                 }
                 
                 Spacer()
-                
                 // 회원가입 화면으로 이동 버튼
                 NavigationLink("회원가입", destination: RegistrationView())
                     .padding(.bottom, 20)
             }
             .padding()
-            .navigationTitle("JATAM")
+          
             .toolbar {
                 ToolbarItem(placement: .principal) { // ✅ 타이틀 중앙 정렬
                     Text("로그인")
@@ -57,10 +58,12 @@ struct LoginView: View {
                         .foregroundColor(.black)
                 }
             }
+           
             .fullScreenCover(isPresented: $showMainTabView) {
                 MainTabView() // ✅ 로그인 성공 후 MainTabView로 이동
             }
         }
+        
     }
     
     // ✅ Firebase 로그인 함수 (마지막 이메일 저장 기능 추가)

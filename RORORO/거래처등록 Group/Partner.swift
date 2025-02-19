@@ -14,3 +14,5 @@ struct Partner: Identifiable, Codable {
     var safetyManagerName: String
     var createdAt: Date
 }
+
+

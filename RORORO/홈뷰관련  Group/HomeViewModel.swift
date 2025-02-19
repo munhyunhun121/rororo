@@ -14,11 +14,15 @@ class HomeViewModel: ObservableObject {
     @Published var partners: [Partner] = [] // ✅ 거래처 목록 저장
     @Published var totalCustomers: Int = 0 // ✅ 거래처 개수 저장
     @Published var errorMessage: String? = nil
-
+    
+    @Published var unvisitedCustomers: Int = 0
+    @Published var visitedCustomers: Int = 0
+    
     private let db = Firestore.firestore()
 
     init() {
         fetchPartners()
+       
     }
 
     // ✅ Firestore에서 거래처 목록 가져오기
@@ -49,7 +53,8 @@ class HomeViewModel: ObservableObject {
             
             // ✅ 닉네임을 기반으로 거래처 목록 + 총 개수 가져오기
             self.loadPartners(nickname: nickname)
-            self.fetchTotalCustomers(nickname: nickname) // 🔥 여기서 추가 호출
+            self.fetchTotalCustomers(nickname: nickname)
+            self.fetchUnvisitedCustomers(nickname: nickname)// 🔥 여기서 추가 호출
         }
     }
 
@@ -87,8 +92,46 @@ class HomeViewModel: ObservableObject {
                     
                     // ✅ 거래처 목록을 가져온 후, 전체 거래처 수 업데이트
                     self.totalCustomers = self.partners.count
-                    print("✅ Firestore에서 가져온 거래처 개수 (리스트 업데이트): \(self.totalCustomers)")
+                    print("✅ Firestore에서 가져온 거래처 목록 ddddd(리스트 업데이트): \(self.totalCustomers)")
+            
                 }
             }
     }
-}
+    
+
+    
+ 
+    private func fetchUnvisitedCustomers(nickname: String) {
+        
+        //이 함수는 잘 동작 함 /. firebase에서 값을 변경했을때 대쉬보드에 잘 들어감 //
+        
+        db.collection("users").document(nickname).collection("partners")
+               .addSnapshotListener { snapshot, error in
+                   if let error = error {
+                       print("🔥 Firestore 거래처 개수 가져오기 실패: \(error.localizedDescription)")
+                       self.errorMessage = "거래처 정보를 가져오지 못했습니다."
+                       return
+                   }
+
+                   DispatchQueue.main.async {
+                       // 방문한 거래처 개수
+                       self.visitedCustomers = snapshot?.documents.filter {
+                           ($0.data()["visited"] as? Bool) == true
+                       }.count ?? 0
+
+                       // 방문하지 않은 거래처 개수
+                       self.unvisitedCustomers = snapshot?.documents.filter {
+                           ($0.data()["visited"] as? Bool) == false
+                       }.count ?? 0
+
+                       print("✅ 방문한 거래처 개수: \(self.visitedCustomers)")
+                       print("✅ 방문하지 않은 거래처 개수: \(self.unvisitedCustomers)")
+                   }
+               }
+       }
+ 
+  }
+
+
+
+

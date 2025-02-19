@@ -9,35 +9,48 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var homeViewModel = HomeViewModel()
-
+    
     let columns: [GridItem] = [
         GridItem(.flexible()), // 첫 번째 열
         GridItem(.flexible()), // 두 번째 열
         GridItem(.flexible())  // 세 번째 열
     ]
-
+    
     var body: some View {
-        VStack {
-            DashboardSummaryView(homeViewModel: homeViewModel)
-            
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 10) {
-                    if let errorMessage = homeViewModel.errorMessage {
-                        Text(errorMessage)
-                            .foregroundColor(.red)
-                            .padding()
-                    } else {
-                        ForEach(homeViewModel.partners) { partner in
-                            PartnerCardView(partner: partner)
-                                .frame(maxWidth: .infinity)
+        NavigationView {
+            VStack {
+                DashboardSummaryView(homeViewModel: homeViewModel)
+
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 10) {
+                        if let errorMessage = homeViewModel.errorMessage {
+                            Text(errorMessage)
+                                .foregroundColor(.red)
+                                .padding()
+                        } else {
+                            ForEach(homeViewModel.partners) { partner in
+                                NavigationLink(
+                                    destination: PartnerDetailView(
+                                        partner: $homeViewModel.partners[
+                                            homeViewModel.partners.firstIndex(where: { $0.id == partner.id })!
+                                        ]
+                                    )
+                                ) {
+                                    PartnerCardView(partner: partner)
+                                        .frame(maxWidth: .infinity)
+                                }
+                            }
                         }
                     }
                 }
-                .padding()
             }
+            .padding()
+         
+            
         }
     }
 }
+
 
 
 struct Partner: Identifiable, Codable {
