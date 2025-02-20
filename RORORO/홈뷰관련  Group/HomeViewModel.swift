@@ -130,6 +130,62 @@ class HomeViewModel: ObservableObject {
                }
        }
  
+    
+    func updatePartner(_ partner: Partner) {
+          guard let partnerId = partner.id else {
+              print("❌ partner.id 없음. Firestore 업데이트 불가")
+              return
+          }
+          
+          guard let user = Auth.auth().currentUser else {
+              print("❌ 로그인된 사용자가 없습니다.")
+              return
+          }
+
+          // 닉네임 가져오기
+          db.collection("users")
+              .whereField("email", isEqualTo: user.email ?? "")
+              .getDocuments { snapshot, error in
+                  if let error = error {
+                      print("🔥 Firestore 닉네임 가져오기 실패: \(error.localizedDescription)")
+                      return
+                  }
+                  
+                  guard let document = snapshot?.documents.first else {
+                      print("❌ Firestore에서 닉네임을 찾을 수 없습니다.")
+                      return
+                  }
+                  
+                  let nickname = document.documentID
+                  
+                  // 업데이트할 데이터 준비
+                  let updatedData: [String: Any] = [
+                      "name": partner.name,
+                      "contact": partner.contact,
+                      "address": partner.address,
+                      "visited": partner.visited,
+                      "monthlyManagementFee": partner.monthlyManagementFee,
+                      "managementArea": partner.managementArea,
+                      "operationCheckMonth": partner.operationCheckMonth,
+                      "comprehensiveCheckMonth": partner.comprehensiveCheckMonth ?? NSNull(),
+                      "safetyManagerName": partner.safetyManagerName
+                  ]
+                  
+                  // Firestore 업데이트
+                  self.db.collection("users")
+                      .document(nickname)
+                      .collection("partners")
+                      .document(partnerId)
+                      .updateData(updatedData) { error in
+                          if let error = error {
+                              print("🔥 Firestore 업데이트 실패: \(error.localizedDescription)")
+                          } else {
+                              print("✅ Firestore 업데이트 성공! (파트너 ID: \(partnerId))")
+                              self.fetchPartners()
+                          }
+                      }
+              }
+      }
   }
 
 
