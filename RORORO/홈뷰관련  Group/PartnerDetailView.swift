@@ -5,6 +5,7 @@ import FirebaseAuth
 struct PartnerDetailView: View {
     @Binding var partner: Partner // 홈뷰에서 선택된 파트너 데이터 수정 가능
     @State private var saveSuccessMessage: String? = nil
+    @State private var showDeleteAlert = false // Alert 표시 여부를 위한 상태 변수
     @StateObject private var homeViewModel = HomeViewModel() // Firebase 업데이트 함수 포함
 
     var body: some View {
@@ -41,6 +42,27 @@ struct PartnerDetailView: View {
                         .cornerRadius(10)
                 }
                 .padding()
+                
+                Button(action: {
+                    showDeleteAlert = true // 삭제 버튼 클릭 시 Alert 활성화
+                }) {
+                    Text("파트너 삭제")
+                        .font(.title2)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding()
+                .alert("삭제 확인", isPresented: $showDeleteAlert) {
+                    Button("삭제", role: .destructive) {
+                        homeViewModel.deletePartner(partner)
+                    }
+                    Button("취소", role: .cancel) { }
+                } message: {
+                    Text("정말로 이 파트너를 삭제하시겠습니까?")
+                }
 
                 if let saveSuccessMessage = saveSuccessMessage {
                     Text(saveSuccessMessage)
@@ -54,7 +76,6 @@ struct PartnerDetailView: View {
         .navigationTitle(partner.name)
     }
 }
-
 
 #Preview {
     PartnerDetailView(partner: .constant(Partner(

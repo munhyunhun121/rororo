@@ -21,12 +21,14 @@ class HomeViewModel: ObservableObject {
     private let db = Firestore.firestore()
 
     init() {
+     
         fetchPartners()
        
     }
 
     // ✅ Firestore에서 거래처 목록 가져오기
     func fetchPartners() {
+        print("✅ Firestore에서 거래처 목록 가져오기")
         guard let user = Auth.auth().currentUser else {
             self.errorMessage = "❌ 로그인된 사용자가 없습니다."
             return
@@ -186,6 +188,53 @@ class HomeViewModel: ObservableObject {
                       }
               }
       }
+    
+    
+    
+    func deletePartner(_ partner: Partner) {
+        guard let partnerId = partner.id else {
+            print("❌ partner.id 없음. Firestore 삭제 불가")
+            return
+        }
+        
+        guard let user = Auth.auth().currentUser else {
+            print("❌ 로그인된 사용자가 없습니다.")
+            return
+        }
+        
+        // 닉네임 가져오기
+        db.collection("users")
+            .whereField("email", isEqualTo: user.email ?? "")
+            .getDocuments { snapshot, error in
+                if let error = error {
+                    print("🔥 Firestore 닉네임 가져오기 실패: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let document = snapshot?.documents.first else {
+                    print("❌ Firestore에서 닉네임을 찾을 수 없습니다.")
+                    return
+                }
+                
+                let nickname = document.documentID
+                
+                // 파트너 문서 삭제
+                self.db.collection("users")
+                    .document(nickname)
+                    .collection("partners")
+                    .document(partnerId)
+                    .delete { error in
+                        if let error = error {
+                            print("🔥 Firestore 삭제 실패: \(error.localizedDescription)")
+                        } else {
+                            print("✅ Firestore 삭제 성공! (파트너 ID: \(partnerId))")
+                            // 삭제 후 최신화 위해 파트너 목록 다시 불러오기
+                            self.fetchPartners()
+                        }
+                    }
+            }
+    }
+
   }
 
 

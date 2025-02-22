@@ -30,8 +30,7 @@ struct HomeView: View {
                         } else {
                             ForEach(homeViewModel.partners) { partner in
                                 NavigationLink(
-                                    destination: PartnerDetailView(
-                                        partner: $homeViewModel.partners[
+                                    destination: PartnerDetailView(partner: $homeViewModel.partners[
                                             homeViewModel.partners.firstIndex(where: { $0.id == partner.id })!
                                         ]
                                     )
