@@ -11,6 +11,7 @@ class PartnerRegisterViewModel: ObservableObject {
     @Published var visited: Bool = false
     @Published var monthlyManagementFee: String = ""
     @Published var managementArea: String = ""
+    @Published var BuildingArea: String = "0"
     @Published var safetyManagerName: String = ""
     @Published var selectedOperationMonth: Int = Calendar.current.component(.month, from: Date())
     @Published var selectedComprehensiveMonth: Int? = nil
@@ -57,12 +58,15 @@ class PartnerRegisterViewModel: ObservableObject {
             errorMessage = "월 관리금액을 숫자로 입력해주세요."
             return
         }
+        
+        
 
         var newPartner: [String: Any] = [
             "name": name,
             "contact": contact,
             "address": address,
             "visited": visited,
+            "BuildingArea": BuildingArea,
             "monthlyManagementFee": monthlyFee,
             "managementArea": managementArea,
             "operationCheckMonth": selectedOperationMonth,
@@ -87,6 +91,7 @@ class PartnerRegisterViewModel: ObservableObject {
                     self.visited = false
                     self.monthlyManagementFee = ""
                     self.managementArea = ""
+                    self.BuildingArea = ""
                     self.safetyManagerName = ""
                     self.selectedComprehensiveMonth = nil
                     self.errorMessage = "거래처가 성공적으로 등록되었습니다."

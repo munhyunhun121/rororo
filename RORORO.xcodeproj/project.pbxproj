@@ -45,7 +45,6 @@
 		210240FC2D5E1B0600D190AA /* Exceptions for "RORORO" folder in "RORORO" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"거래처등록 Group/Partner.swift",
 				Info.plist,
 				ROROROUITests.swift,
 			);

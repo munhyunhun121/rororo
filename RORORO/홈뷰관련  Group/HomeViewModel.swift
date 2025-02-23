@@ -26,6 +26,7 @@ class HomeViewModel: ObservableObject {
        
     }
 
+    
     // ✅ Firestore에서 거래처 목록 가져오기
     func fetchPartners() {
         print("✅ Firestore에서 거래처 목록 가져오기")
@@ -166,6 +167,7 @@ class HomeViewModel: ObservableObject {
                       "contact": partner.contact,
                       "address": partner.address,
                       "visited": partner.visited,
+                      "BuildingArea": partner.BuildingArea,
                       "monthlyManagementFee": partner.monthlyManagementFee,
                       "managementArea": partner.managementArea,
                       "operationCheckMonth": partner.operationCheckMonth,
