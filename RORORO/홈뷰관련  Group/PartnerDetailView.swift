@@ -6,6 +6,7 @@ struct PartnerDetailView: View {
     @Binding var partner: Partner // 홈뷰에서 선택된 파트너 데이터 수정 가능
     @State private var saveSuccessMessage: String? = nil
     @State private var showDeleteAlert = false // Alert 표시 여부를 위한 상태 변수
+    @State private var showaddAlert = false
     @StateObject private var homeViewModel = HomeViewModel() // Firebase
 
 
@@ -39,7 +40,7 @@ struct PartnerDetailView: View {
                     .padding()
 
                 Button(action: {
-                    homeViewModel.updatePartner(partner) // Firebase 업데이트 실행
+                    showaddAlert = true
                 }) {
                     Text("변경사항 저장")
                         .font(.title2)
@@ -50,6 +51,14 @@ struct PartnerDetailView: View {
                         .cornerRadius(10)
                 }
                 .padding()
+                .alert("저장 확인", isPresented: $showaddAlert) {
+                    Button("저장", role: .destructive) {
+                        homeViewModel.updatePartner(partner)
+                    }
+                    Button("취소", role: .cancel) { }
+                } message: {
+                    Text("정말로 이 파트너를 저장하시겠습니까?")
+                }
                 
                 Button(action: {
                     showDeleteAlert = true // 삭제 버튼 클릭 시 Alert 활성화
