@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var homeViewModel = HomeViewModel()
-    
+   
     let columns: [GridItem] = [
         GridItem(.flexible()), // 첫 번째 열
         GridItem(.flexible()), // 두 번째 열
@@ -19,8 +19,13 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             VStack {
+                Text("총 면적:\(homeViewModel.totalBuildingArea, specifier: "%.0f")㎡")
+                               .font(.largeTitle)
+                               .foregroundColor(.blue)
+                               .padding()
                 DashboardSummaryView(homeViewModel: homeViewModel)
-
+                    .font(.headline)
+                    .padding()
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 10) {
                         if let errorMessage = homeViewModel.errorMessage {
@@ -43,12 +48,14 @@ struct HomeView: View {
                     }
                 }
             }
-            .padding()
-         
-            
+                    .padding()
+                }
+                .onAppear {
+                    homeViewModel.fetchTotalBuildingArea()
+                    // 🔄 뷰가 나타날 때 자동으로 데이터 로드
+                }
+            }
         }
-    }
-}
 
 
 

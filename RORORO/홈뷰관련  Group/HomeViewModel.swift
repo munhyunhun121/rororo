@@ -14,17 +14,66 @@ class HomeViewModel: ObservableObject {
     @Published var partners: [Partner] = [] // ✅ 거래처 목록 저장
     @Published var totalCustomers: Int = 0 // ✅ 거래처 개수 저장
     @Published var errorMessage: String? = nil
-    
     @Published var unvisitedCustomers: Int = 0
     @Published var visitedCustomers: Int = 0
-    
+    @Published var totalBuildingArea: Double = 0.0
     private let db = Firestore.firestore()
 
     init() {
-     
+    
         fetchPartners()
+        fetchTotalBuildingArea()
        
     }
+    
+    func fetchTotalBuildingArea() {
+            guard let user = Auth.auth().currentUser else {
+                print("❌ 로그인된 사용자가 없습니다.")
+                self.totalBuildingArea = 0.0
+                return
+            }
+
+            db.collection("users").whereField("email", isEqualTo: user.email ?? "").getDocuments { snapshot, error in
+                if let error = error {
+                    print("🔥 Firestore 닉네임 가져오기 실패: \(error.localizedDescription)")
+                    self.totalBuildingArea = 0.0
+                    return
+                }
+
+                guard let document = snapshot?.documents.first else {
+                    print("❌ Firestore에서 사용자를 찾을 수 없습니다.")
+                    self.totalBuildingArea = 0.0
+                    return
+                }
+
+                let nickname = document.documentID
+                print("✅ Firestore에서 가져온 닉네임: \(nickname)")
+
+                self.db.collection("users").document(nickname).collection("partners").getDocuments { snapshot, error in
+                    if let error = error {
+                        print("🔥 Firestore 거래처 목록 가져오기 실패: \(error.localizedDescription)")
+                        self.totalBuildingArea = 0.0
+                        return
+                    }
+
+                    let total = snapshot?.documents.reduce(0.0) { sum, document in
+                        if let areaString = document.data()["BuildingArea"] as? String,
+                           let area = Double(areaString) {
+                            return sum + area
+                        } else {
+                            return sum
+                        }
+                    } ?? 0.0
+
+                    print("✅ 총 건물 면적 합산 완료: \(total)㎡")
+                    
+                    // 🔥 UI 업데이트 (메인 스레드에서 실행)
+                    DispatchQueue.main.async {
+                        self.totalBuildingArea = total
+                    }
+                }
+            }
+        }
 
     
     // ✅ Firestore에서 거래처 목록 가져오기
@@ -191,6 +240,8 @@ class HomeViewModel: ObservableObject {
               }
       }
     
+    
+
     
     
     func deletePartner(_ partner: Partner) {

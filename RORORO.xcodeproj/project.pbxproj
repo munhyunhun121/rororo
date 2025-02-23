@@ -16,6 +16,9 @@
 		210240F02D5E0F2500D190AA /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 210240EF2D5E0F2500D190AA /* KakaoSDKCommon */; };
 		210240F22D5E0F2500D190AA /* KakaoSDKTalk in Frameworks */ = {isa = PBXBuildFile; productRef = 210240F12D5E0F2500D190AA /* KakaoSDKTalk */; };
 		210240F42D5E0F2500D190AA /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 210240F32D5E0F2500D190AA /* KakaoSDKUser */; };
+		212A5FB62D6B07FA00F80913 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 212A5FB52D6B07FA00F80913 /* FirebaseAnalytics */; };
+		212A5FB82D6B07FA00F80913 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 212A5FB72D6B07FA00F80913 /* FirebaseAuth */; };
+		212A5FBA2D6B07FA00F80913 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 212A5FB92D6B07FA00F80913 /* FirebaseCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +113,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				212A5FB62D6B07FA00F80913 /* FirebaseAnalytics in Frameworks */,
+				212A5FBA2D6B07FA00F80913 /* FirebaseCore in Frameworks */,
+				212A5FB82D6B07FA00F80913 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +201,9 @@
 			);
 			name = ROROROTests;
 			packageProductDependencies = (
+				212A5FB52D6B07FA00F80913 /* FirebaseAnalytics */,
+				212A5FB72D6B07FA00F80913 /* FirebaseAuth */,
+				212A5FB92D6B07FA00F80913 /* FirebaseCore */,
 			);
 			productName = ROROROTests;
 			productReference = 210240BF2D5CE52100D190AA /* ROROROTests.xctest */;
@@ -691,6 +700,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 210240EC2D5E0F2500D190AA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKUser;
+		};
+		212A5FB52D6B07FA00F80913 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 210240DE2D5CE67E00D190AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		212A5FB72D6B07FA00F80913 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 210240DE2D5CE67E00D190AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		212A5FB92D6B07FA00F80913 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 210240DE2D5CE67E00D190AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
