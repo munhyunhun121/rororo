@@ -43,7 +43,6 @@ struct PartnerRegisterView: View {
                 
                 HStack {
                     TextField("월 관리금액", text: $viewModel.monthlyManagementFee)
-                        .keyboardType(.decimalPad)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding()
                     Text("원")

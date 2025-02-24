@@ -19,10 +19,13 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("총 면적:\(homeViewModel.totalBuildingArea, specifier: "%.0f")㎡")
-                               .font(.largeTitle)
-                               .foregroundColor(.blue)
-                               .padding()
+                HStack{
+                    Text("총 면적:\(homeViewModel.totalBuildingArea, specifier: "%.0f")㎡")
+                        .font(.caption)
+                        .foregroundColor(.blue)
+                    
+                    Spacer()
+                }
                 DashboardSummaryView(homeViewModel: homeViewModel)
                     .font(.headline)
                     .padding()
