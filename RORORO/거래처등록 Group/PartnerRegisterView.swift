@@ -39,9 +39,7 @@ struct PartnerRegisterView: View {
                 TextField("주소", text: $viewModel.address)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
-                
-                Toggle("방문 여부", isOn: $viewModel.visited)
-                    .padding()
+              
                 
                 HStack {
                     TextField("월 관리금액", text: $viewModel.monthlyManagementFee)

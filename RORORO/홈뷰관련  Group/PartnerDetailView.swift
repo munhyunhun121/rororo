@@ -54,6 +54,7 @@ struct PartnerDetailView: View {
                 .alert("저장 확인", isPresented: $showaddAlert) {
                     Button("저장", role: .destructive) {
                         homeViewModel.updatePartner(partner)
+                        
                     }
                     Button("취소", role: .cancel) { }
                 } message: {

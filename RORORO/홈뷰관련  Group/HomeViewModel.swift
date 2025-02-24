@@ -22,7 +22,7 @@ class HomeViewModel: ObservableObject {
     init() {
     
         fetchPartners()
-        fetchTotalBuildingArea()
+      
        
     }
     
@@ -107,6 +107,7 @@ class HomeViewModel: ObservableObject {
             self.loadPartners(nickname: nickname)
             self.fetchTotalCustomers(nickname: nickname)
             self.fetchUnvisitedCustomers(nickname: nickname)// 🔥 여기서 추가 호출
+          
         }
     }
 
@@ -235,6 +236,7 @@ class HomeViewModel: ObservableObject {
                           } else {
                               print("✅ Firestore 업데이트 성공! (파트너 ID: \(partnerId))")
                               self.fetchPartners()
+                             
                           }
                       }
               }
