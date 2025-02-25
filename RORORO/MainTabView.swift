@@ -19,7 +19,7 @@ struct MainTabView: View {
             
             // ✅ 하단 커스텀 탭 바 (토스 스타일)
             
-            HStack {
+            HStack  {
                   Spacer()
                   CustomTabButton(title: "홈", icon: "house.fill", index: 0, selectedTab: $selectedTab)
                   Spacer()
@@ -31,7 +31,7 @@ struct MainTabView: View {
               .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous)) // ✅ 상단 라운드 처리
               .overlay(
                   RoundedRectangle(cornerRadius: 20) // ✅ 상단에 얇은 회색 선 추가
-                    .stroke(Color.yellow.opacity(0.9), lineWidth: 1.5)
+                    .stroke(Color.gray.opacity(0.9), lineWidth: 0.5)
                       .padding(.top, -1),
                   alignment: .top
               )
@@ -56,12 +56,13 @@ struct CustomTabButton: View {
         }) {
             VStack {
                 Image(systemName: icon)
-                    .font(.system(size: 15, weight: .bold))
+                    .font(.system(size: 20, weight: .bold))
                     .foregroundColor(selectedTab == index ? .white : .gray)
                 Text(title)
                     .font(.caption)
                     .foregroundColor(selectedTab == index ? .white : .gray)
             }
+            .frame(maxHeight: .infinity, alignment: .top)
             .padding(.vertical, 5)
         }
     }
