@@ -25,6 +25,7 @@ struct LoginView: View {
                     .padding(.horizontal)
                 
                 Button(action: {
+                    SoundManager.shared.playSound("mixkit-alert-quick-chime-766", fileType: "wav")
                     loginUser()
                 }) {
                     Text("Login")

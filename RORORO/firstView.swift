@@ -33,6 +33,7 @@ struct FirstView: View {
                         TabButton(title: "거래처등록", index: 1, selectedTab: $selectedTab)
                         TabButton(title: "발견", index: 2, selectedTab: $selectedTab)
                         TabButton(title: "피드", index: 3, selectedTab: $selectedTab)
+                    
                     }
                     .frame(width: geometry.size.width, height: 50)
                     .background(Color.black)
@@ -106,9 +107,11 @@ struct TabButton: View {
         }) {
             Text(title)
                 .foregroundColor(selectedTab == index ? .white : .gray)
-                .font(.system(size: 13, weight: selectedTab == index ? .bold : .regular))
+                .font(.system(size: 15, weight: selectedTab == index ? .bold : .regular))
+            
                 .frame(maxWidth: .infinity, maxHeight: 30)
                 .background(selectedTab == index ? Color.gray.opacity(0.2) : Color.clear)
+            
         }
     }
 }

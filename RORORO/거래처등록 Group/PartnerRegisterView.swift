@@ -95,6 +95,7 @@ struct PartnerRegisterView: View {
                 }
 
                 Button(action: {
+                    SoundManager.shared.playSound("mixkit-select-click-1109", fileType: "wav")
                     viewModel.addPartner() // 거래처 추가 함수 호출
                 }) {
                     Text("거래처 등록")
