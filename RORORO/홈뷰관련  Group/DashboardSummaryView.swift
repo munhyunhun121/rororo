@@ -1,62 +1,70 @@
-//
-//  DashboardSummaryView.swift
-//  RORORO
-//
-//  Created by 문현권 on 2/17/25.
-//
-
 import SwiftUI
-
-
 
 struct DashboardSummaryView: View {
     @ObservedObject var homeViewModel: HomeViewModel
-  
-    @State private var totalCustomers: Int = 0 // ✅ 전체 거래처 개수
-    @State private var visitedCustomers = 2
-    @State private var unvisitedCustomers: Int = 0 // 비지티드 Fasle 개수
+
     var body: some View {
-        
-        HStack(spacing: 12) { // 간격을 조금 줄임
-            SummaryCard(title: "전체", value: "\(homeViewModel.totalCustomers)")
-            SummaryCard(title: "방문", value: "\(homeViewModel.visitedCustomers)")
-            SummaryCard(title: "미방문", value: "\(homeViewModel.unvisitedCustomers)")
+        GeometryReader { geometry in
+            HStack(spacing: geometry.size.width * 0.04) { // ✅ 화면 크기에 맞춰 간격 조절
+                SummaryCard(
+                    title: "전체",
+                    value: "\(homeViewModel.totalCustomers)",
+                    icon: "person.3.fill",
+                    color: .blue,
+                    width: geometry.size.width * 0.28 // ✅ 카드 너비를 화면 크기에 맞게 조절
+                )
+                SummaryCard(
+                    title: "방문",
+                    value: "\(homeViewModel.visitedCustomers)",
+                    icon: "checkmark.circle.fill",
+                    color: .green,
+                    width: geometry.size.width * 0.28
+                )
+                SummaryCard(
+                    title: "미방문",
+                    value: "\(homeViewModel.unvisitedCustomers)",
+                    icon: "xmark.circle.fill",
+                    color: .red,
+                    width: geometry.size.width * 0.28
+                )
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.horizontal, geometry.size.width * 0.05) // ✅ 좌우 패딩을 화면 크기에 맞게 조정
+            .padding(.vertical, 10)
         }
-        .padding(.horizontal, 20) // 좌우 패딩 추가해서 크기 조절
-        .padding(.vertical, 8) // 상하 패딩 추가
-        .frame(maxWidth: 350) // 최대 가로 크기를 줄임
-        .background(Color(.systemGray5)) // 배경 추가 (선택)
-        .cornerRadius(12) // 둥근 모서리 추가
+        .frame(height: 120) // ✅ 카드 전체 높이를 일정하게 설정
     }
-    
 }
-
-
 
 struct SummaryCard: View {
     let title: String
     let value: String
-    
+    let icon: String
+    let color: Color
+    let width: CGFloat // ✅ 기기 크기에 맞춰 조정할 수 있도록 width 추가
+
     var body: some View {
-        VStack {
+        VStack(spacing: 8) {
+            Image(systemName: icon)
+                .font(.system(size: width * 0.3)) // ✅ 아이콘 크기도 반응형으로 조정
+                .foregroundColor(color)
+
             Text(title)
                 .font(.subheadline)
                 .foregroundColor(.gray)
+
             Text(value)
                 .font(.title2)
                 .bold()
+                .foregroundColor(.primary)
         }
-        
         .padding()
-        .frame(maxWidth: .infinity)
-        .background(Color(.systemGray5))
-        .cornerRadius(12)
-        .shadow(radius: 4)
+        .frame(width: width, height: 100) // ✅ 카드 크기를 일정하게 유지
+        .background(Color.black)
+        .cornerRadius(16)
+        .shadow(color: Color.black.opacity(0.1), radius: 5, y: 2)
     }
 }
-
-
-
 
 #Preview {
     DashboardSummaryView(homeViewModel: HomeViewModel())

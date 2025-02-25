@@ -9,7 +9,11 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var homeViewModel = HomeViewModel()
-   
+    
+     @State private var totalCustomers: Int = 0 // ✅ 전체 거래처 개수
+     @State private var visitedCustomers = 0
+     @State private var notVisitedCustomers = 0
+    
     let columns: [GridItem] = [
         GridItem(.flexible()), // 첫 번째 열
         GridItem(.flexible()), // 두 번째 열
