@@ -2,17 +2,20 @@ import SwiftUI
 
 struct DashboardSummaryView: View {
     @ObservedObject var homeViewModel: HomeViewModel
-
+  
     var body: some View {
         GeometryReader { geometry in
             HStack(spacing: geometry.size.width * 0.04) { // ✅ 화면 크기에 맞춰 간격 조절
                 SummaryCard(
                     title: "전체",
-                    value: "\(homeViewModel.totalCustomers)",
+                    value: "\(homeViewModel.partners.count)",
                     icon: "person.3.fill",
                     color: .blue,
                     width: geometry.size.width * 0.28 // ✅ 카드 너비를 화면 크기에 맞게 조절
                 )
+                .onTapGesture {
+                               homeViewModel.showUnvisitedOnly = false
+                           }
                 SummaryCard(
                     title: "방문",
                     value: "\(homeViewModel.visitedCustomers)",
@@ -22,13 +25,14 @@ struct DashboardSummaryView: View {
                 )
                 SummaryCard(
                     title: "미방문",
-                    value: "\(homeViewModel.unvisitedCustomers)",
+                    value: "\(homeViewModel.unvisitedPartners.count)",
                     icon: "xmark.circle.fill",
                     color: .red,
                     width: geometry.size.width * 0.28
                 )
                 .onTapGesture { // ✅ 미방문 카드에만 클릭 이벤트 추가
                     SoundManager.shared.playSound("mixkit-select-click-1109", fileType: "wav") // ✅ 클릭 사운드 재생
+                    homeViewModel.showUnvisitedOnly = true
                 }
             }
             .frame(maxWidth: .infinity)

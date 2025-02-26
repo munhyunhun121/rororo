@@ -12,6 +12,8 @@ import FirebaseFirestore
 class HomeViewModel: ObservableObject {
     
     @Published var partners: [Partner] = [] // ✅ 거래처 목록 저장
+    @Published var unvisitedPartners: [Partner] = [] // ✅ 미방문 거래처 리스트
+    @Published var showUnvisitedOnly: Bool = false
     @Published var totalCustomers: Int = 0 // ✅ 거래처 개수 저장
     @Published var errorMessage: String? = nil
     @Published var unvisitedCustomers: Int = 0
@@ -26,7 +28,7 @@ class HomeViewModel: ObservableObject {
        
     }
     
-    func fetchTotalBuildingArea() {
+    func fetchTotalBuildingArea() { // HomeViewUI에서 뷰가 실행될떄 켜지는 코드 onappear에 뷰가로드될떄 실행되게 해놓음
             guard let user = Auth.auth().currentUser else {
                 print("❌ 로그인된 사용자가 없습니다.")
                 self.totalBuildingArea = 0.0
@@ -107,7 +109,6 @@ class HomeViewModel: ObservableObject {
             self.loadPartners(nickname: nickname)
             self.fetchTotalCustomers(nickname: nickname)
             self.fetchUnvisitedCustomers(nickname: nickname)// 🔥 여기서 추가 호출
-          
         }
     }
 
@@ -142,7 +143,7 @@ class HomeViewModel: ObservableObject {
                     self.partners = snapshot?.documents.compactMap { document in
                         try? document.data(as: Partner.self) // Firestore 데이터 → 모델 변환
                     } ?? []
-                    
+                    self.unvisitedPartners = self.partners.filter { !$0.visited }
                     // ✅ 거래처 목록을 가져온 후, 전체 거래처 수 업데이트
                     self.totalCustomers = self.partners.count
                     print("✅ Firestore에서 가져온 거래처 목록 ddddd(리스트 업데이트): \(self.totalCustomers)")
@@ -290,6 +291,9 @@ class HomeViewModel: ObservableObject {
             }
     }
 
+    
+    
+    
   }
 
 
