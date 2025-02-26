@@ -27,6 +27,9 @@ struct DashboardSummaryView: View {
                     color: .red,
                     width: geometry.size.width * 0.28
                 )
+                .onTapGesture { // ✅ 미방문 카드에만 클릭 이벤트 추가
+                    SoundManager.shared.playSound("mixkit-select-click-1109", fileType: "wav") // ✅ 클릭 사운드 재생
+                }
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, geometry.size.width * 0.05) // ✅ 좌우 패딩을 화면 크기에 맞게 조정
