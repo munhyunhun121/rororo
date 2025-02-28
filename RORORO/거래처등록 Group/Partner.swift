@@ -14,6 +14,9 @@ struct Partner: Identifiable, Codable {
     var comprehensiveCheckMonth: Int? // ✅ 1~12 (월만 저장)
     var safetyManagerName: String
     var createdAt: Date
+    var reportReceivedDate: String
+    var SubmetDate: String
+  
 }
 
 

@@ -13,6 +13,7 @@ class HomeViewModel: ObservableObject {
     
     @Published var partners: [Partner] = [] // ✅ 거래처 목록 저장
     @Published var unvisitedPartners: [Partner] = [] // ✅ 미방문 거래처 리스트
+    @Published var SubmetDate: [Partner] = []
     @Published var showUnvisitedOnly: Bool = false
     @Published var totalCustomers: Int = 0 // ✅ 거래처 개수 저장
     @Published var errorMessage: String? = nil
@@ -24,9 +25,103 @@ class HomeViewModel: ObservableObject {
     init() {
     
         fetchPartners()
-      
+        
        
     }
+    
+
+//    func addFieldsToAllDocuments() {
+//        let db = Firestore.firestore()
+//        let collectionRef = db.collection("partners") // ✅ 컬렉션 이름 확인!
+//
+//        collectionRef.getDocuments { snapshot, error in
+//            if let error = error {
+//                print("Firestore 문서 가져오기 실패: \(error.localizedDescription)")
+//                return
+//            }
+//
+//            guard let documents = snapshot?.documents else { return }
+//
+//            for document in documents {
+//                let nickname = document.documentID
+//
+//                let updateData: [String: Any] = [
+//                    "SubmetDate": "날짜 없음",  // ✅ 기본값 설정
+//                    "reportReceivedDate": "날짜 없음"  // ✅ 기본값 설정
+//                ]
+//
+//                // ✅ 기존 데이터 유지하면서 새로운 필드 추가
+//                collectionRef.document(nickname).setData(updateData, merge: true) { error in
+//                    if let error = error {
+//                        print("문서 \(nickname) 업데이트 실패: \(error.localizedDescription)")
+//                    } else {
+//                        print("문서 \(nickname)에 SubmetDate 및 reportReceivedDate 추가 완료! (기본값: '날짜 없음')")
+//                    }
+//                }
+//            }
+//        }
+//    }
+
+
+
+    func addFieldsToAllUserPartners() {
+        guard let user = Auth.auth().currentUser else {
+            print("❌ 로그인된 사용자가 없습니다.")
+            return
+        }
+
+        let db = Firestore.firestore()
+
+        db.collection("users")
+            .whereField("email", isEqualTo: user.email ?? "")
+            .getDocuments { snapshot, error in
+                if let error = error {
+                    print("🔥 Firestore 닉네임 가져오기 실패: \(error.localizedDescription)")
+                    return
+                }
+
+                guard let document = snapshot?.documents.first else {
+                    print("❌ Firestore에서 닉네임을 찾을 수 없습니다.")
+                    return
+                }
+
+                let nickname = document.documentID
+                let partnersRef = db.collection("users").document(nickname).collection("partners")
+
+                partnersRef.getDocuments { snapshot, error in
+                    if let error = error {
+                        print("🔥 Firestore에서 파트너 문서 가져오기 실패: \(error.localizedDescription)")
+                        return
+                    }
+
+                    guard let documents = snapshot?.documents else {
+                        print("❌ 파트너 문서가 없습니다.")
+                        return
+                    }
+
+                    for document in documents {
+                        let partnerRef = partnersRef.document(document.documentID)
+
+                        let updateData: [String: Any] = [
+                            "SubmetDate": "비어있음",
+                            "reportReceivedDate": "비어있음"
+                        ]
+
+                        partnerRef.setData(updateData, merge: true) { error in
+                            if let error = error {
+                                print("🔥 문서 \(document.documentID) 업데이트 실패: \(error.localizedDescription)")
+                            } else {
+                                print("✅ 문서 \(document.documentID) Firestore에 기본값 저장 완료! (SubmetDate: 비어있음)")
+                            }
+                        }
+                    }
+                }
+            }
+    }
+
+
+  
+
     
     func fetchTotalBuildingArea() { // HomeViewUI에서 뷰가 실행될떄 켜지는 코드 onappear에 뷰가로드될떄 실행되게 해놓음
             guard let user = Auth.auth().currentUser else {
@@ -109,6 +204,7 @@ class HomeViewModel: ObservableObject {
             self.loadPartners(nickname: nickname)
             self.fetchTotalCustomers(nickname: nickname)
             self.fetchUnvisitedCustomers(nickname: nickname)// 🔥 여기서 추가 호출
+          
         }
     }
 
@@ -291,7 +387,12 @@ class HomeViewModel: ObservableObject {
             }
     }
 
-    
+    func formattedDate(_ date: Date) -> String {
+           let formatter = DateFormatter()
+           formatter.dateFormat = "yyyy년 MM월 dd일"
+           return formatter.string(from: date)
+       }
+   
     
     
   }

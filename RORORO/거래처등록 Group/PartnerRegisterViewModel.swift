@@ -17,6 +17,7 @@ class PartnerRegisterViewModel: ObservableObject {
     @Published var selectedComprehensiveMonth: Int? = nil
     @Published var errorMessage: String?
     @Published var isLoading: Bool = true
+  
 
     let db = Firestore.firestore()
     let months: [Int] = Array(1...12)
@@ -71,7 +72,9 @@ class PartnerRegisterViewModel: ObservableObject {
             "managementArea": managementArea,
             "operationCheckMonth": selectedOperationMonth,
             "safetyManagerName": safetyManagerName,
-            "createdAt": Timestamp()
+            "createdAt": Timestamp(),
+            "reportReceivedDate": "비어있음",
+            "SubmetDate": "비어있음"
         ]
 
         if let comprehensiveMonth = selectedComprehensiveMonth {
@@ -94,6 +97,7 @@ class PartnerRegisterViewModel: ObservableObject {
                     self.BuildingArea = ""
                     self.safetyManagerName = ""
                     self.selectedComprehensiveMonth = nil
+                    
                     self.errorMessage = "거래처가 성공적으로 등록되었습니다."
                     print("Partner 등록 완료!")
                 }

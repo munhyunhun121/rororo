@@ -40,7 +40,7 @@ struct HomeView: View {
                         let displayedPartners = homeViewModel.showUnvisitedOnly ? homeViewModel.unvisitedPartners : homeViewModel.partners
                         
                         if displayedPartners.isEmpty {
-                            Text(homeViewModel.showUnvisitedOnly ? "미방문 거래처가 없습니다." : "거래처 목록이 없습니다.")
+                            Text(homeViewModel.showUnvisitedOnly ? "미방문 거래처가 없습니다." : "loading Partners")
                                 .foregroundColor(.red)
                                 .padding()
                         } else {
@@ -64,6 +64,7 @@ struct HomeView: View {
                 .onAppear {
                     homeViewModel.fetchTotalBuildingArea()
                     homeViewModel.fetchPartners()
+                   
                     // 🔄 뷰가 나타날 때 자동으로 데이터 로드
                 }
             }
