@@ -30,6 +30,7 @@ struct HomeView: View {
                         .foregroundColor(.blue)
                     
                     Spacer()
+                    
                 }
                 DashboardSummaryView(homeViewModel: homeViewModel)
                     .font(.headline)
