@@ -11,8 +11,11 @@ import FirebaseFirestore
 
 class HomeViewModel: ObservableObject {
     
+    @Published var submitPartners: [Partner] = [] // ✅ 제출될 거래처 저장 배열
+    @Published var selectedFilter: PartnerFilter = .all
+    
     @Published var partners: [Partner] = [] // ✅ 거래처 목록 저장
-    @Published var unvisitedPartners: [Partner] = [] // ✅ 미방문 거래처 리스트
+    @Published var unvisitedPartners: [Partner] = [] // ✅ 미방문 거래처 리스트 //로드파트너스에서 가저옴 
     @Published var SubmetDate: [Partner] = []
     @Published var showUnvisitedOnly: Bool = false
     @Published var totalCustomers: Int = 0 // ✅ 거래처 개수 저장
@@ -28,8 +31,24 @@ class HomeViewModel: ObservableObject {
         
        
     }
-    
+    var displayedPartners: [Partner] {
+          switch selectedFilter {
+          case .all:
+              return partners
+          case .unvisited:
+              return unvisitedPartners
+          case .submitted:
+              return submitPartners
+          }
+      }
 
+    enum PartnerFilter {
+        case all        // 전체 거래처
+        case unvisited  // 미방문 거래처
+        case submitted  // 제출된 거래처
+    }
+    
+    
 //    func addFieldsToAllDocuments() {
 //        let db = Firestore.firestore()
 //        let collectionRef = db.collection("partners") // ✅ 컬렉션 이름 확인!
@@ -243,6 +262,8 @@ class HomeViewModel: ObservableObject {
                     // ✅ 거래처 목록을 가져온 후, 전체 거래처 수 업데이트
                     self.totalCustomers = self.partners.count
                     print("✅ Firestore에서 가져온 거래처 목록 ddddd(리스트 업데이트): \(self.totalCustomers)")
+                    
+                    self.submitPartners = self.partners.filter { $0.SubmetDate != "비어있음" }
             
                 }
             }

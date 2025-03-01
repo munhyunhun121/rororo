@@ -17,7 +17,7 @@ struct DashboardSummaryView: View {
                                )
                                .onTapGesture {
                                    SoundManager.shared.playSound("mixkit-select-click-1109", fileType: "wav")
-                                   homeViewModel.showUnvisitedOnly = false
+                                   homeViewModel.selectedFilter = .all
                                }
 
                                SummaryCard(
@@ -37,7 +37,7 @@ struct DashboardSummaryView: View {
                                )
                                .onTapGesture {
                                    SoundManager.shared.playSound("mixkit-select-click-1109", fileType: "wav")
-                                   homeViewModel.showUnvisitedOnly = true
+                                   homeViewModel.selectedFilter = .unvisited
                                }
 
                                // ✅ 추가 카드
@@ -48,6 +48,10 @@ struct DashboardSummaryView: View {
                                    color: .yellow,
                                    width: geometry.size.width * 0.22
                                )
+                               .onTapGesture {
+                                   SoundManager.shared.playSound("mixkit-select-click-1109", fileType: "wav")
+                                   homeViewModel.selectedFilter = .submitted
+                               }
                            }
                            .padding(.horizontal, geometry.size.width * 0.01) // ✅ 좌우 패딩을 화면 크기에 맞게 조정
                            .padding(.vertical, 10)

@@ -4,11 +4,13 @@
 //
 //  Created by 문현권 on 2/17/25.
 //
+
+
 import FirebaseFirestore
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var homeViewModel = HomeViewModel()
+     @StateObject private var homeViewModel = HomeViewModel()
    
 
      @State private var totalCustomers: Int = 0 // ✅ 전체 거래처 개수
@@ -37,14 +39,16 @@ struct HomeView: View {
                     .padding()
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 10) {
-                        let displayedPartners = homeViewModel.showUnvisitedOnly ? homeViewModel.unvisitedPartners : homeViewModel.partners
-                        
-                        if displayedPartners.isEmpty {
-                            Text(homeViewModel.showUnvisitedOnly ? "미방문 거래처가 없습니다." : "loading Partners")
-                                .foregroundColor(.red)
-                                .padding()
+                        if homeViewModel.displayedPartners.isEmpty {
+                                  Text(
+                                      homeViewModel.selectedFilter == .unvisited ? "미방문 거래처가 없습니다." :
+                                      homeViewModel.selectedFilter == .submitted ? "제출된 거래처가 없습니다." :
+                                      "거래처 목록이 없습니다."
+                                  )
+                                  .foregroundColor(.red)
+                                  .padding()
                         } else {
-                            ForEach(displayedPartners) { partner in
+                            ForEach(homeViewModel.displayedPartners) { partner in
                                 NavigationLink(
                                     destination: PartnerDetailView(partner: $homeViewModel.partners[
                                         homeViewModel.partners.firstIndex(where: { $0.id == partner.id })!
