@@ -52,12 +52,18 @@ class HomeViewModel: ObservableObject {
     var displayedPartners: [Partner] {
         let filtered: [Partner]
         switch selectedFilter {
-        case .all: filtered = partners
-        case .unvisited: filtered = unvisitedPartners
-        case .submitted: filtered = submitPartners
-        case .visited: filtered = visitedPartners
+        case .all:
+            filtered = partners
+        case .unvisited:
+            filtered = unvisitedPartners
+        case .submitted:
+            filtered = submitPartners.sorted {
+                ($0.submitDate ?? Date.distantFuture) < ($1.submitDate ?? Date.distantFuture)
+            }
+        case .visited:
+            filtered = visitedPartners
         }
-        
+
         if searchText.isEmpty {
             return filtered
         } else {
@@ -205,6 +211,24 @@ class HomeViewModel: ObservableObject {
             }
         }
     }
+    
+    
+    // MARK: - Firestore Update
+    func resetSubmitDate(for partner: Partner) {
+        guard let user = Auth.auth().currentUser else { return }
+        let db = Firestore.firestore()
+
+        db.collection("users")
+            .whereField("email", isEqualTo: user.email ?? "")
+            .getDocuments { snapshot, error in
+                guard let document = snapshot?.documents.first else { return }
+                let nickname = document.documentID
+                let partnerRef = db.collection("users").document(nickname).collection("partners").document(partner.id ?? "unknown_id")
+
+                partnerRef.updateData(["SubmetDate": "비어있음"])
+            }
+    }
+
 
 
     // MARK: - Delete Methods

@@ -31,9 +31,12 @@ struct PartnerDetailView: View {
         }
         .navigationTitle(partner.name)
     }
+    
+
 
     // MARK: - Sections
     private var submitDateSection: some View {
+        
         VStack(spacing: 10) {
             Button(action: { showDatePicker.toggle() }) {
                 Label("날짜 선택", systemImage: "calendar.badge.plus")
@@ -48,12 +51,26 @@ struct PartnerDetailView: View {
             .sheet(isPresented: $showDatePicker) {
                 DatePickerView(partner: $partner, selectedDate: $selectedDate, showDatePicker: $showDatePicker)
             }
+            Button(action: {
+                resetSubmitDate()
+               }) {
+                   Label("제출 마감 초기화", systemImage: "arrow.counterclockwise")
+                       .font(.title3.bold())
+                       .padding()
+                       .frame(maxWidth: .infinity)
+                       .background(Color.red)
+                       .foregroundColor(.white)
+                       .cornerRadius(12)
+                       .shadow(radius: 5)
+               }
+
 
             Text("보고서 제출 마감: \(partner.SubmetDate)")
             Text("이행완료 마감: \(partner.reportReceivedDate)")
         }
         .font(.headline)
         .padding()
+        
     }
 
     private var infoSection: some View {
@@ -105,6 +122,11 @@ struct PartnerDetailView: View {
         }
         .padding()
     }
+    
+    private func resetSubmitDate() {
+        partner.SubmetDate = "비어있음"
+        homeViewModel.resetSubmitDate(for: partner)
+    }
 }
 
 // MARK: - DatePickerView
@@ -141,6 +163,8 @@ struct DatePickerView: View {
         .padding()
     }
 }
+
+
 
 // MARK: - Firestore Update
 func updateDateInFirestore(partner: Partner, newDate: Date) {

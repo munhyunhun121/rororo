@@ -11,7 +11,14 @@ struct HomeView: View {
     @State private var showMemo = false
     @State private var memoText: String = UserDefaults.standard.string(forKey: "memoText") ?? ""
 
-    private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
+    private var columns: [GridItem] {
+        if homeViewModel.selectedFilter == .submitted {
+            return [GridItem(.flexible())] // 1열
+        } else {
+            return Array(repeating: .init(.flexible()), count: 3) // 3열
+        }
+    }
+
     
     var body: some View {
         NavigationView {
@@ -149,8 +156,13 @@ struct HomeView: View {
                 } else {
                     ForEach(homeViewModel.displayedPartners) { partner in
                         NavigationLink(destination: PartnerDetailView(partner: binding(for: partner))) {
-                            PartnerCardView(partner: partner)
-                                .frame(maxWidth: .infinity)
+                            if homeViewModel.selectedFilter == .submitted {
+                                SubmitCardView(partner: partner)
+                                    .frame(maxWidth: .infinity)
+                            } else {
+                                PartnerCardView(partner: partner)
+                                    .frame(maxWidth: .infinity)
+                            }
                         }
                     }
                 }
@@ -168,7 +180,7 @@ struct HomeView: View {
     private var emptyMessageText: String {
         switch homeViewModel.selectedFilter {
         case .unvisited: return "미방문 거래처가 없습니다."
-        case .submitted: return "제출된 거래처가 없습니다."
+        case .submitted: return "제출 예정 거래처가 없습니다."
         default: return "거래처 목록이 없습니다."
         }
     }
@@ -199,6 +211,37 @@ struct PartnerCardView: View {
                     .foregroundColor(partner.visited ? .green : .gray)
                     .font(.caption)
             }
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(radius: 3)
+    }
+}
+
+// MARK: - SubmitCardView
+struct SubmitCardView: View {
+    var partner: Partner
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            HStack{
+                Text(partner.name)
+                    .foregroundColor(.black)
+                Spacer()
+                VStack {
+                Text("보고서 마감일")
+                        .foregroundColor(.black)
+                Text((partner.SubmetDate))
+                    .foregroundColor(.red)
+                    .font(.subheadline)
+            }
+//                Text("이행완료 마감일: \(partner.reportReceivedDate)")
+//                    .font(.subheadline)
+//                    .foregroundColor(.black)
+            }
+         
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)

@@ -19,6 +19,13 @@ struct Partner: Identifiable, Codable {
   
 }
 
+extension Partner {
+    var submitDate: Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd" // 실제 SubmetDate 포맷 맞춰서!
+        return formatter.date(from: SubmetDate)
+    }
+}
 
 
 

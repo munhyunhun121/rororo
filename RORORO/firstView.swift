@@ -30,9 +30,9 @@ struct FirstView: View {
                     // ✅ 상단 탭 바 (토스증권 홈 / 관심 / 발견 / 피드)
                     HStack(spacing: 0) {
                         TabButton(title: "홈", index: 0, selectedTab: $selectedTab)
-                        TabButton(title: "거래처등록", index: 1, selectedTab: $selectedTab)
-                        TabButton(title: "발견", index: 2, selectedTab: $selectedTab)
-                        TabButton(title: "피드", index: 3, selectedTab: $selectedTab)
+                        TabButton(title: "TIP", index: 1, selectedTab: $selectedTab)
+                        TabButton(title: "NEWS", index: 2, selectedTab: $selectedTab)
+                        TabButton(title: "커뮤니티", index: 3, selectedTab: $selectedTab)
                     
                     }
                     .frame(width: geometry.size.width, height: 50)
@@ -128,7 +128,7 @@ struct ProfileView: View {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.gray.opacity(0.2))
                         .frame(width: UIScreen.main.bounds.width * 0.9, height: 100)
-                        .overlay(Text("📌 거래처 섹션 \(index + 1)").foregroundColor(.white))
+                        .overlay(Text("📌 화재안전관리 법률 \(index + 1)").foregroundColor(.white))
                 }
             }
             .padding(.vertical)
@@ -144,7 +144,7 @@ struct SettingsView: View {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.gray.opacity(0.2))
                         .frame(width: UIScreen.main.bounds.width * 0.9, height: 100)
-                        .overlay(Text("🔍 발견 섹션 \(index + 1)").foregroundColor(.white))
+                        .overlay(Text("🔍 파주 (옹석리공장 화재) \(index + 1)").foregroundColor(.white))
                 }
             }
             .padding(.vertical)
@@ -160,7 +160,7 @@ struct InfoView: View {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.gray.opacity(0.2))
                         .frame(width: UIScreen.main.bounds.width * 0.9, height: 100)
-                        .overlay(Text("📰 피드 섹션 \(index + 1)").foregroundColor(.white))
+                        .overlay(Text("📰 금호방재 채용 \(index + 1)").foregroundColor(.white))
                 }
             }
             .padding(.vertical)
