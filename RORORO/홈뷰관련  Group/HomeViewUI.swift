@@ -8,6 +8,8 @@ struct HomeView: View {
     @State private var showSettingView = false
     @State private var showUnvisitAllAlert = false
     @State private var isSearching = false
+    @State private var showMemo = false
+    @State private var memoText: String = UserDefaults.standard.string(forKey: "memoText") ?? ""
 
     private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
@@ -15,8 +17,37 @@ struct HomeView: View {
         NavigationView {
               VStack(alignment: .leading, spacing: 16) {
                   totalBuildingAreaView
-                  DashboardSummaryView(homeViewModel: homeViewModel, showSettingView: $showSettingView,isSearching:$isSearching)
+                  DashboardSummaryView(homeViewModel: homeViewModel, showSettingView: $showSettingView,isSearching:$isSearching, showMemo: $showMemo)
                       .font(.headline)
+                  
+                  if showMemo {
+                      VStack(alignment: .leading, spacing: 8) {
+                          HStack {
+                              Text("메모")
+                                  .font(.headline)
+                              Spacer()
+                              Button(action: {
+                                  memoText = ""
+                                  UserDefaults.standard.removeObject(forKey: "memoText")
+                              }) {
+                                  Image(systemName: "trash")
+                                      .foregroundColor(.red)
+                              }
+                          }
+
+                          TextEditor(text: $memoText)
+                              .frame(height: 100)
+                              .padding()
+                              .background(Color(UIColor.systemGray6))
+                              .cornerRadius(12)
+                              .shadow(radius: 3)
+                              .onChange(of: memoText) { newValue in
+                                  UserDefaults.standard.set(newValue, forKey: "memoText")
+                              }
+                      }
+                      .padding(.horizontal)
+                  }
+
                   
                   if isSearching {
                       TextField("이름으로 검색", text: $homeViewModel.searchText)

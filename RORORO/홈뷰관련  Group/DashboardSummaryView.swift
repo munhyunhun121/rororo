@@ -6,6 +6,7 @@ struct DashboardSummaryView: View {
     @ObservedObject var homeViewModel: HomeViewModel
     @Binding var showSettingView: Bool
     @Binding var isSearching: Bool
+    @Binding var showMemo: Bool
     var body: some View {
         GeometryReader { geometry in
             ScrollView(.horizontal, showsIndicators: false) {
@@ -22,6 +23,12 @@ struct DashboardSummaryView: View {
     // MARK: - Summary Cards
     @ViewBuilder
     private func summaryCards(geometry: GeometryProxy) -> some View {
+        SummaryCard(title: "메모", value: "-", icon:"pencil.and.outline" , color: .blue, width: geometry.size.width * 0.22)
+            .onTapGesture {
+                playSoundAndSetFilter(.all)
+                showMemo.toggle()
+            }
+        
         SummaryCard(title: "검색", value: "-", icon:"magnifyingglass.circle.fill" , color: .blue, width: geometry.size.width * 0.22)
             .onTapGesture {
                 playSoundAndSetFilter(.all)
@@ -103,6 +110,7 @@ struct SummaryCard: View {
     DashboardSummaryView(
         homeViewModel: HomeViewModel(),
         showSettingView: .constant(false),
-        isSearching: .constant(false)
+        isSearching: .constant(false),
+        showMemo: .constant(false)
     )
 }
