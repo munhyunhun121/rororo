@@ -1,104 +1,173 @@
-//
-//  HomeView.swift
-//  RORORO
-//
-//  Created by 문현권 on 2/17/25.
-//
-
-
-import FirebaseFirestore
+// MARK: - Import
 import SwiftUI
+import FirebaseFirestore
 
+// MARK: - HomeView
 struct HomeView: View {
-     @StateObject private var homeViewModel = HomeViewModel()
-   
+    @StateObject private var homeViewModel = HomeViewModel()
+    @State private var showSettingView = false
+    @State private var showUnvisitAllAlert = false
+    @State private var isSearching = false
 
-     @State private var totalCustomers: Int = 0 // ✅ 전체 거래처 개수
-     @State private var visitedCustomers = 0
-     @State private var notVisitedCustomers = 0
-    
-    let columns: [GridItem] = [
-        GridItem(.flexible()), // 첫 번째 열
-        GridItem(.flexible()), // 두 번째 열
-        GridItem(.flexible())  // 세 번째 열
-    ]
+    private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
     var body: some View {
         NavigationView {
-            VStack {
-                HStack{
-                    Text("총 면적:\(homeViewModel.totalBuildingArea, specifier: "%.0f")㎡")
-                        .font(.caption)
-                        .foregroundColor(.blue)
-                    
-                    Spacer()
-                    
-                }
-                DashboardSummaryView(homeViewModel: homeViewModel)
+              VStack(alignment: .leading, spacing: 16) {
+                  totalBuildingAreaView
+                  DashboardSummaryView(homeViewModel: homeViewModel, showSettingView: $showSettingView,isSearching:$isSearching)
+                      .font(.headline)
+                  
+                  if isSearching {
+                      TextField("이름으로 검색", text: $homeViewModel.searchText)
+                          .textFieldStyle(RoundedBorderTextFieldStyle())
+                          .padding(.horizontal)
+                  }
+                  
+                  if showSettingView {
+                      settingView
+                          .padding()
+                          .background(Color.white)
+                          .cornerRadius(12)
+                          .shadow(radius: 5)
+                       
+                  }
+                  
+                  partnerListView
+              }
+              .padding()
+              .onAppear {
+                  homeViewModel.fetchPartners()
+              }
+          }
+      }
+    
+    // MARK: - settimgView
+    private var settingView: some View {
+        VStack {
+            HStack {
+                Text("설정")
+                    .foregroundColor(.black)
                     .font(.headline)
                     .padding()
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 10) {
-                        if homeViewModel.displayedPartners.isEmpty {
-                                  Text(
-                                      homeViewModel.selectedFilter == .unvisited ? "미방문 거래처가 없습니다." :
-                                      homeViewModel.selectedFilter == .submitted ? "제출된 거래처가 없습니다." :
-                                      "거래처 목록이 없습니다."
-                                  )
-                                  .foregroundColor(.red)
-                                  .padding()
-                        } else {
-                            ForEach(homeViewModel.displayedPartners) { partner in
-                                NavigationLink(
-                                    destination: PartnerDetailView(partner: $homeViewModel.partners[
-                                        homeViewModel.partners.firstIndex(where: { $0.id == partner.id })!
-                                    ]
-                                                                  )
-                                ) {
-                                    PartnerCardView(partner: partner)
-                                        .frame(maxWidth: .infinity)
-                                }
-                            }
+                Spacer()
+                Button(action: {
+                    showSettingView = false
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title)
+                        .foregroundColor(.red)
+                }
+            }
+            Divider()
+            
+            Button(action: {
+                showUnvisitAllAlert = true
+            }) {
+                Image(systemName: "arrow.counterclockwise")
+                    .font(.title2)
+                    .foregroundColor(.black)
+                Text("전체 거래처 미방문 처리")
+                    .font(.subheadline)
+                               .padding()
+                               .frame(maxWidth: .infinity)
+                               .background(Color.red)
+                               .foregroundColor(.white)
+                               .cornerRadius(12)
+            }
+            .padding(.top, 20)
+            .alert("전체 미방문 처리", isPresented: $showUnvisitAllAlert) {
+                Button("확인", role: .destructive) {
+                    homeViewModel.setAllPartnersUnvisited()
+                    showSettingView = false
+                }
+                Button("취소", role: .cancel) {}
+            } message: {
+                Text("모든 거래처의 방문 상태를 '미방문'으로 변경하시겠습니까?")
+            }
+
+            Spacer()
+        }
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(Color.white)
+        .cornerRadius(16)
+        .shadow(radius: 10)
+        .padding()
+    }
+
+    
+    
+    
+    // MARK: - Total Building Area
+    private var totalBuildingAreaView: some View {
+        HStack {
+            Text("총 면적: \(homeViewModel.totalBuildingArea, specifier: "%.0f")㎡")
+                .font(.caption)
+                .foregroundColor(.blue)
+            Spacer()
+        }
+    }
+    
+    // MARK: - Partner List
+    private var partnerListView: some View {
+        ScrollView {
+            LazyVGrid(columns: columns, spacing: 10) {
+                if homeViewModel.displayedPartners.isEmpty {
+                    emptyMessageView
+                } else {
+                    ForEach(homeViewModel.displayedPartners) { partner in
+                        NavigationLink(destination: PartnerDetailView(partner: binding(for: partner))) {
+                            PartnerCardView(partner: partner)
+                                .frame(maxWidth: .infinity)
                         }
                     }
                 }
             }
-                    .padding()
-                }
-                .onAppear {
-                    homeViewModel.fetchTotalBuildingArea()
-                    homeViewModel.fetchPartners()
-                   
-                    // 🔄 뷰가 나타날 때 자동으로 데이터 로드
-                }
-            }
         }
+    }
+    
+    // MARK: - Empty Message
+    private var emptyMessageView: some View {
+        Text(emptyMessageText)
+            .foregroundColor(.red)
+            .padding()
+    }
+    
+    private var emptyMessageText: String {
+        switch homeViewModel.selectedFilter {
+        case .unvisited: return "미방문 거래처가 없습니다."
+        case .submitted: return "제출된 거래처가 없습니다."
+        default: return "거래처 목록이 없습니다."
+        }
+    }
+    
+    // MARK: - Partner Binding
+    private func binding(for partner: Partner) -> Binding<Partner> {
+        guard let index = homeViewModel.partners.firstIndex(where: { $0.id == partner.id }) else {
+            fatalError("Partner not found")
+        }
+        return $homeViewModel.partners[index]
+    }
+}
 
-
-
-
-
+// MARK: - PartnerCardView
 struct PartnerCardView: View {
     var partner: Partner
     
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
-           
             Text(partner.name)
                 .font(.subheadline)
                 .foregroundColor(.black)
-                .font(.caption)
             HStack {
-                 // 방문 여부를 체크표시로 표시
                 Text(partner.visited ? "방문함" : "미방문")
                     .font(.caption)
-                                   .foregroundColor(.black)
-                                   .font(.caption)
+                    .foregroundColor(.black)
                 Image(systemName: partner.visited ? "checkmark.circle.fill" : "checkmark.circle")
-                    .foregroundColor(partner.visited ? .green : .gray) // 방문 여부에 따라 색을 변경
+                    .foregroundColor(partner.visited ? .green : .gray)
                     .font(.caption)
-                    }
-            
+            }
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -107,7 +176,8 @@ struct PartnerCardView: View {
         .shadow(radius: 3)
     }
 }
+
+// MARK: - Preview
 #Preview {
     HomeView()
 }
-
