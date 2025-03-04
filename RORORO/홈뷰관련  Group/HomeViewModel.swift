@@ -115,7 +115,9 @@ class HomeViewModel: ObservableObject {
                     self.partners = snapshot?.documents.compactMap { try? $0.data(as: Partner.self) } ?? []
                     self.unvisitedPartners = self.partners.filter { !$0.visited }
                     self.visitedPartners = self.partners.filter { $0.visited }
-                    self.submitPartners = self.partners.filter { $0.SubmetDate != "비어있음" }
+                    self.submitPartners = self.partners.filter {
+                        $0.SubmetDate != "비어있음" || $0.reportReceivedDate != "비어있음"
+                    }
                     self.totalCustomers = self.partners.count
                 }
             }
@@ -226,6 +228,39 @@ class HomeViewModel: ObservableObject {
                 let partnerRef = db.collection("users").document(nickname).collection("partners").document(partner.id ?? "unknown_id")
 
                 partnerRef.updateData(["SubmetDate": "비어있음"])
+            }
+    }
+
+    
+    
+    func resetreportReceivedDate(for partner: Partner) {
+        guard let user = Auth.auth().currentUser else { return }
+        let db = Firestore.firestore()
+
+        db.collection("users")
+            .whereField("email", isEqualTo: user.email ?? "")
+            .getDocuments { snapshot, error in
+                guard let document = snapshot?.documents.first else { return }
+                let nickname = document.documentID
+                let partnerRef = db.collection("users").document(nickname).collection("partners").document(partner.id ?? "unknown_id")
+
+                partnerRef.updateData(["reportReceivedDate": "비어있음"])
+            }
+    }
+    
+    // MARK: - reportReceivedDate Update
+    func updateReportPeriodInFirestore(partner: Partner, period: String) {
+        guard let user = Auth.auth().currentUser else { return }
+        let db = Firestore.firestore()
+
+        db.collection("users")
+            .whereField("email", isEqualTo: user.email ?? "")
+            .getDocuments { snapshot, error in
+                guard let document = snapshot?.documents.first else { return }
+                let nickname = document.documentID
+                let partnerRef = db.collection("users").document(nickname).collection("partners").document(partner.id ?? "unknown_id")
+
+                partnerRef.updateData(["reportReceivedDate": period])
             }
     }
 

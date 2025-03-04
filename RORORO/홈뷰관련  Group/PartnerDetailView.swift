@@ -12,6 +12,10 @@ struct PartnerDetailView: View {
     @StateObject private var homeViewModel = HomeViewModel()
     @State private var selectedDate: Date?
     @State private var showDatePicker = false
+    @State private var showPeriodPicker = false
+    
+    @State private var showSubmitDatePicker = false
+    @State private var showPeriodDatePicker = false
 
     var body: some View {
         ScrollView {
@@ -39,7 +43,7 @@ struct PartnerDetailView: View {
         
         VStack(spacing: 10) {
             Button(action: { showDatePicker.toggle() }) {
-                Label("날짜 선택", systemImage: "calendar.badge.plus")
+                Label("보고서 제출 날짜 선택", systemImage: "calendar.badge.plus")
                     .font(.title3.bold())
                     .padding()
                     .frame(maxWidth: .infinity)
@@ -50,6 +54,24 @@ struct PartnerDetailView: View {
             }
             .sheet(isPresented: $showDatePicker) {
                 DatePickerView(partner: $partner, selectedDate: $selectedDate, showDatePicker: $showDatePicker)
+            }
+            
+            Button(action: { showPeriodDatePicker.toggle() }) {
+                     Label("이행 기간 설정", systemImage: "calendar.badge.clock")
+                         .font(.title3.bold())
+                         .padding()
+                         .frame(maxWidth: .infinity)
+                         .background(Color.purple)
+                         .foregroundColor(.white)
+                         .cornerRadius(12)
+                         .shadow(radius: 5)
+                 }
+            .sheet(isPresented: $showPeriodDatePicker) {
+                PeriodDatePickerView(
+                    homeViewModel: homeViewModel,
+                    partner: $partner,
+                    isPresented: $showPeriodDatePicker
+                )
             }
             Button(action: {
                 resetSubmitDate()
@@ -63,7 +85,20 @@ struct PartnerDetailView: View {
                        .cornerRadius(12)
                        .shadow(radius: 5)
                }
-
+            
+            
+            Button(action: {
+                resetreportReceivedDate()
+               }) {
+                   Label("이행 제출 초기화", systemImage: "arrow.counterclockwise")
+                       .font(.title3.bold())
+                       .padding()
+                       .frame(maxWidth: .infinity)
+                       .background(Color.red)
+                       .foregroundColor(.white)
+                       .cornerRadius(12)
+                       .shadow(radius: 5)
+               }
 
             Text("보고서 제출 마감: \(partner.SubmetDate)")
             Text("이행완료 마감: \(partner.reportReceivedDate)")
@@ -127,7 +162,113 @@ struct PartnerDetailView: View {
         partner.SubmetDate = "비어있음"
         homeViewModel.resetSubmitDate(for: partner)
     }
+    private func resetreportReceivedDate() {
+        partner.reportReceivedDate = "비어있음"
+        homeViewModel.resetreportReceivedDate(for: partner)
+    }
 }
+
+
+
+
+// MARK: - PeriodDatePickerView
+struct PeriodDatePickerView: View {
+    @ObservedObject var homeViewModel: HomeViewModel
+    @Binding var partner: Partner
+    @Binding var isPresented: Bool
+    @State private var startDate = Date()
+    @State private var endDate = Date()
+    
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy년 M월 d일"
+        return formatter
+    }()
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                Text("이행 기간 설정")
+                    .font(.title2.bold())
+                    .padding(.top)
+                
+                // ✅ 선택된 날짜 미리 보기
+                HStack(spacing: 20) {
+                    VStack {
+                        Text("시작 날짜")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                        Text(dateFormatter.string(from: startDate))
+                            .font(.headline)
+                            .foregroundColor(.red)
+                    }
+                    Divider()
+                        .frame(height: 40)
+                    VStack {
+                        Text("종료 날짜")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                        Text(dateFormatter.string(from: endDate))
+                            .font(.headline)
+                            .foregroundColor(.blue)
+                    }
+                }
+                .padding()
+                .background(Color(UIColor.secondarySystemBackground))
+                .cornerRadius(12)
+                
+                // ✅ 시작 날짜 선택
+                VStack(alignment: .leading) {
+                    Text("시작 날짜")
+                        .font(.subheadline)
+                    DatePicker(
+                        "",
+                        selection: $startDate,
+                        displayedComponents: .date
+                    )
+                    .datePickerStyle(GraphicalDatePickerStyle())
+                }
+                .padding()
+                
+                // ✅ 종료 날짜 선택
+                VStack(alignment: .leading) {
+                    Text("종료 날짜")
+                        .font(.subheadline)
+                    DatePicker(
+                        "",
+                        selection: $endDate,
+                        displayedComponents: .date
+                    )
+                    .datePickerStyle(GraphicalDatePickerStyle())
+                }
+                .padding()
+                
+                // ✅ 저장 버튼
+                Button("저장") {
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd"
+                    let period = "\(formatter.string(from: startDate)) ~ \(formatter.string(from: endDate))"
+                    
+                    partner.reportReceivedDate = period
+                    homeViewModel.updateReportPeriodInFirestore(partner: partner, period: period)
+                    
+                    isPresented = false
+                }
+                .buttonStyle(MainButtonStyle(color: .purple))
+                .padding(.top)
+                
+                // ✅ 취소 버튼
+                Button("취소") {
+                    isPresented = false
+                }
+                .buttonStyle(MainButtonStyle(color: .gray))
+            }
+            .padding()
+        }
+    }
+}
+
+
 
 // MARK: - DatePickerView
 struct DatePickerView: View {
@@ -148,7 +289,7 @@ struct DatePickerView: View {
                 Button("취소") { showDatePicker = false }
                     .buttonStyle(MainButtonStyle(color: .gray))
 
-                Button("저장") {
+                Button("보고서 제출 저장") {
                     if let date = selectedDate {
                         let formatter = DateFormatter()
                         formatter.dateFormat = "yyyy-MM-dd"
@@ -158,6 +299,8 @@ struct DatePickerView: View {
                     }
                 }
                 .buttonStyle(MainButtonStyle(color: .blue))
+                
+                
             }
         }
         .padding()

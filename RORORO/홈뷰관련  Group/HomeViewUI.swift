@@ -223,33 +223,57 @@ struct PartnerCardView: View {
 // MARK: - SubmitCardView
 struct SubmitCardView: View {
     var partner: Partner
-    
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            HStack{
-                Text(partner.name)
-                    .foregroundColor(.black)
-                Spacer()
-                VStack {
-                Text("보고서 마감일")
+        VStack(spacing: 10) {
+            // ✅ 이름 항상 표시
+            Text(partner.name)
+                .font(.headline)
+                .foregroundColor(.black)
+
+            // ✅ 이행완료 마감일이 "비어있음"이 아니면 표시
+            if partner.reportReceivedDate != "비어있음" {
+                VStack(spacing: 5) {
+                    Text("이행완료 기간")
+                        .font(.subheadline)
                         .foregroundColor(.black)
-                Text((partner.SubmetDate))
-                    .foregroundColor(.red)
-                    .font(.subheadline)
+                    Text(partner.reportReceivedDate)
+                        .font(.headline)
+                        .foregroundColor(.red)
+                    Text("이행완료제출 마감일")
+                        .font(.subheadline)
+                        .foregroundColor(.black)
+                }
             }
-//                Text("이행완료 마감일: \(partner.reportReceivedDate)")
-//                    .font(.subheadline)
-//                    .foregroundColor(.black)
+
+            // ✅ 보고서 마감일이 "비어있음"이 아니면 표시
+            if partner.SubmetDate != "비어있음" {
+                VStack(spacing: 5) {
+                    Text("보고서 제출 마감일")
+                        .font(.subheadline)
+                        .foregroundColor(.black)
+                    Text(partner.SubmetDate)
+                        .font(.subheadline)
+                        .foregroundColor(.blue)
+                }
             }
-         
         }
         .padding()
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity)
         .background(Color.white)
         .cornerRadius(12)
         .shadow(radius: 3)
     }
 }
+
+
+
+
+
+
+
+
+
 
 // MARK: - Preview
 #Preview {
